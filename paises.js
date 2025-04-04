@@ -5,6 +5,8 @@ class FiltroPaises {
         return {
           pais: e.name.common,
           capital: e.capital !== undefined ? e.capital[0] : "Sin Capital",
+          continente: e.continents !== undefined ? e.continents[0]: "Dato no registrado",
+          area: e.area !== undefined ? e.area : "Dato no registrado",
         };
       };
       this.formato = this.defaultFormato;

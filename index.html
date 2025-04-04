@@ -7,12 +7,20 @@
 
       async function  inicializar() {
         this.filtros = await new FiltroPaises();  
+        //para agregar filtros
         this.filtros.addFiltro('Sudamerica', (e) => e.subregion ==='South America');
+        this.filtros.addFiltro('Africa', (e)=> e.subregion ==='Western Africa');
+        this.filtros.addFiltro('De habla Guarani', (e)=> e.languages && Object.values(e.languages).includes("Guaraní"));
+        this.filtros.addFiltro('Insulares', (e) => !e.borders || e.borders.length===0);
+        this.filtros.addFiltro('Más de un idioma oficial', (e) => e.languages && Object.keys(e.languages).length >1);
+        this.filtros.addFiltro('Super Poblado', (e)=> e.population > 100000000);
+
         const selectElement = document.getElementById('paises-select');
         const filtrosDisponibles = this.filtros.getFiltros()
         filtrosDisponibles.forEach( f => selectElement.add(new Option(f.name, f.name)));
       }
-
+      //se ejecuta cuando se selecciona un filtro del menu desplegable
+      
       function changeSelect(value) {
           const preElement = document.getElementById('json');
           const filteredData= this.filtros.aplicarFiltroConFormato(value)
@@ -21,7 +29,11 @@
 
       function incluyePoblacion(value) {
         const selectElement = document.getElementById('paises-select');
+        const filtroSeleccionado = selectElement.options[selectElement.selectedIdex].value;
+       
+
         this.filtros.setFormato(value)
+        //changeSelect(filtroSeleccionado);
         changeSelect(selectElement.options[selectElement.selectedIndex].value)
       }
 
