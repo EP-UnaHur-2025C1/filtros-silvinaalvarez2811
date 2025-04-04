@@ -26,16 +26,13 @@
           const filteredData= this.filtros.aplicarFiltroConFormato(value)
           preElement.innerText = JSON.stringify(filteredData, null, 2);
       }
-
       function incluyePoblacion(value) {
         const selectElement = document.getElementById('paises-select');
-        const filtroSeleccionado = selectElement.options[selectElement.selectedIdex].value;
-       
-
         this.filtros.setFormato(value)
-        //changeSelect(filtroSeleccionado);
         changeSelect(selectElement.options[selectElement.selectedIndex].value)
       }
+      
+      
 
       window.onload =  inicializar;
     </script>
